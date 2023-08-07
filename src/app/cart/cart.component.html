@@ -1,0 +1,61 @@
+<ng-container *ngIf="cart.cart.length; else emptyCart">
+  <ul class="cart-list">
+    <li *ngFor="let item of cart.cart" class="cart-item">
+      <img class="cart-item-image" [src]="item.items.image" />
+      <div class="cart-item-info">
+        <p>{{ item.items.name }}</p>
+        <span
+          *ngIf="
+            item.items.discountPrice !== item.items.price;
+            else regularPrice
+          "
+        >
+          {{ item.items.discountPrice | currency }}
+          <div
+            *ngIf="item.items.discountPrice !== item.items.price"
+            class="discount-container"
+          >
+            <p>
+              <s>Original price: {{ item.items.price | currency }}</s> ({{
+                (
+                  (item.items.price - item.items.discountPrice) /
+                  item.items.price
+                ).toFixed(2)
+              }}% off)
+            </p>
+          </div>
+        </span>
+        <ng-template #regularPrice>
+          {{ item.items.price | currency }}
+        </ng-template>
+      </div>
+      <div class="cart-item-actions">
+        <p>{{ item.quantity }}</p>
+        <button class="btn btn-add" (click)="addToCart(item.items)">+</button>
+        <button
+          class="btn btn-remove"
+          (click)="removeFromCart(item.items)"
+          *ngIf="checkItemInCart(item.items)"
+        >
+          -
+        </button>
+      </div>
+    </li>
+  </ul>
+  <hr />
+  <div class="total">Total: {{ total | currency }}</div>
+  <hr />
+  <div class="tax">Tax: {{ tax | currency }}</div>
+  <hr />
+  <div class="subtotal">Subtotal: {{ subtotal | currency }}</div>
+  <button class="payment" (click)="clearCart()">Magically pay and exit</button>
+</ng-container>
+
+<ng-template #emptyCart>
+  <div class="empty-container">
+    <div class="empty-cart">No items in cart.</div>
+    <button class="back-button">
+      <a routerLink="/">Back to dashboard...</a>
+    </button>
+  </div>
+</ng-template>

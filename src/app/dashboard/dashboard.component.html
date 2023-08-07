@@ -1,0 +1,13 @@
+<div class="parent-container">
+  <div class="quote-container">
+    {{ quoteObj.author }}: {{ quoteObj.content }}
+  </div>
+</div>
+<app-individual-items
+  [type]="'discount'"
+  [items]="discountItems"
+></app-individual-items>
+<app-individual-items
+  [type]="'regular'"
+  [items]="regularItems"
+></app-individual-items>
