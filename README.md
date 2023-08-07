@@ -1,3 +1,5 @@
+**https://icy-flower-0eb12ff00.3.azurestaticapps.net/dashboard**
+
 # PointOfSale
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
